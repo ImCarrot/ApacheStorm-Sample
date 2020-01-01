@@ -3,6 +3,7 @@ package com.iamcarrot.sample.TridentSample;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.trident.TridentTopology;
+import org.apache.storm.trident.operation.builtin.Count;
 import org.apache.storm.trident.operation.builtin.Debug;
 import org.apache.storm.tuple.Fields;
 
@@ -13,10 +14,12 @@ public class TridentMain {
 
         topology.newStream("lines", new WordReader())
                 .each(new Fields("word"), new SplitFunction(), new Fields("word_split"))
-                .each(new Fields("word_split"), new Debug());
+                .groupBy(new Fields("word_split"))
+                .aggregate(new Count(), new Fields("count"))
+                .each(new Fields("word_split", "count"), new Debug());
 
         Config conf = new Config();
-        conf.setDebug(true);
+        conf.setDebug(false);
         conf.put("fileToRead", "X:\\1. Projects\\Java\\personal\\ApacheStorm-Sample\\TridentSample\\sentences.txt");
 
         LocalCluster cluster = new LocalCluster();
