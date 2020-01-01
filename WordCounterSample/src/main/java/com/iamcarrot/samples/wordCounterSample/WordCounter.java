@@ -17,7 +17,7 @@ public class WordCounter extends BaseRichBolt {
     private String fileName;
 
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
-        this.counters = new HashMap<String, Integer>();
+        this.counters = new HashMap<>();
         String name = context.getThisComponentId();
         int id = context.getThisTaskId();
         this.fileName = stormConf.get("dirToWrite").toString() + "Output-" + name + id + ".txt";
