@@ -1,0 +1,4 @@
+radish: 1
+eat: 1
+human: 1
+carrot: 2

@@ -1,0 +1,10 @@
+or: 1
+prefer: 1
+like: 1
+do: 2
+to: 1
+hey: 1
+.: 1
+you: 2
+food: 1
+?: 1
